@@ -1,4 +1,10 @@
-let tasks = [];
+let tasks = [
+  { text: "test1", completed: false },
+  { text: "test2", completed: false },
+  { text: "test3", completed: false },
+  { text: "test4", completed: false },
+  { text: "test5", completed: false },
+];
 let completedTasks = [];
 let isUpdateMode = false;
 let updateIndex = null;
