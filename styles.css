@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: #f4f4f4;
 }
 
@@ -18,7 +18,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.container h2 {
+.container h3 {
   text-align: center;
 }
 
@@ -27,18 +27,46 @@ body {
   margin: 10px 0;
 }
 
-.input-content button {
-  width: 20%;
-  margin-left: 2px;
-}
-
-input[type="text"] {
+.input-content input[type="text"] {
   width: 78%;
-  padding: 7px 10px;
+  padding: 8px 10px;
   border: none;
   outline: none;
   border-radius: 5px;
   border: 1px solid gray;
+}
+
+.input-content #addButton {
+  width: 20%;
+  margin-left: 2px;
+}
+
+ul {
+  width: 100%;
+  list-style-type: none;
+  display: grid;
+  gap: 10px;
+}
+
+li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#taskList li:hover {
+  cursor: move;
+}
+
+#noTask {
+  display: block;
+}
+
+#showText {
+  display: none;
+  margin-top: 10px;
+  text-align: unset;
 }
 
 button {
@@ -47,22 +75,6 @@ button {
   border: none;
   outline: none;
   border-radius: 5px;
-  cursor: pointer;
-}
-
-ul {
-  list-style-type: none;
-  display: grid;
-  gap: 10px;
-}
-
-li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-li:hover {
   cursor: pointer;
 }
 
@@ -85,4 +97,8 @@ li:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.restore {
+  margin-right: 5px;
 }

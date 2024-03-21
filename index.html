@@ -4,19 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Simple To-Do List</title>
+    <title>To-Do List App</title>
   </head>
   <body>
     <div class="container">
-      <h2>My To-Do List</h2>
+      <h3>My To-Do List</h3>
       <div class="input-content">
         <input type="text" id="taskInput" placeholder="Add a new task" />
         <button id="addButton" onclick="addOrUpdateTask()">Add Task</button>
       </div>
-      <ul id="taskList"></ul>
-      <h3 id="showText" style="display: none; margin-top: 10px">
-        Completed tasks
-      </h3>
+      <h5 id="noTask">No task to do!</h5>
+      <ul id="taskList" ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
+      <h3 id="showText">Completed tasks</h3>
       <ul id="completedTasks"></ul>
     </div>
     <script src="script.js"></script>

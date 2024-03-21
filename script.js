@@ -30,6 +30,8 @@ function renderTasks() {
 
   tasks.forEach((task, index) => {
     const listItem = document.createElement("li");
+    listItem.draggable = true;
+    listItem.setAttribute("ondragstart", `drag(event, ${index})`);
     listItem.innerHTML = `
       <span class="${task.completed ? "completed" : ""}">${index + 1}. ${
       task.text
@@ -62,8 +64,32 @@ function renderTasks() {
     completedTasksList.appendChild(listItem);
   });
 
+  document.getElementById("noTask").style.display =
+    tasks.length < 1 ? "block" : "none";
+
   document.getElementById("showText").style.display =
     completedTasks.length > 0 ? "block" : "none";
+}
+
+function renderCompletedTasks() {
+  const completedTasksList = document.getElementById("completedTasks");
+  completedTasksList.innerHTML = "";
+
+  completedTasks.forEach((task, index) => {
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `
+      <span class="completed">${index + 1}. ${task.text}</span> 
+      <div style="display: flex;">
+        <button class="restore" onclick="restoreTask(${index})"> 
+          <img src="./images/restore.svg" width="18" >
+        </button>
+        <button class="delete" onclick="removeCompletedTask(${index})">
+          <img src="./images/delete.svg" width="20" >
+        </button>
+      </div>
+    `;
+    completedTasksList.appendChild(listItem);
+  });
 }
 
 function markAsCompleted(index) {
@@ -71,6 +97,7 @@ function markAsCompleted(index) {
   completedTasks.push(tasks[index]);
   tasks.splice(index, 1);
   renderTasks();
+  renderCompletedTasks();
 }
 
 function removeTask(index) {
@@ -89,6 +116,38 @@ function updateTask(index) {
   isUpdateMode = true;
   updateIndex = index;
   document.getElementById("addButton").innerText = "Update";
+}
+function restoreTask(index) {
+  const restoredTask = completedTasks[index];
+  completedTasks.splice(index, 1);
+  tasks.push(restoredTask);
+  renderTasks();
+  renderCompletedTasks();
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function drag(event, index) {
+  event.dataTransfer.setData("index", index);
+}
+
+function drop(event) {
+  event.preventDefault();
+  const fromIndex = event.dataTransfer.getData("index");
+  const toIndex = tasks.length;
+
+  if (fromIndex === toIndex) {
+    return;
+  }
+  const from = parseInt(fromIndex);
+  const to = parseInt(toIndex);
+  const [draggedItem] = tasks.splice(from, 1);
+  tasks.splice(to, 0, draggedItem);
+  updateIndex = to;
+
+  renderTasks();
 }
 
 renderTasks();
