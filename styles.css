@@ -55,10 +55,6 @@ li {
   justify-content: space-between;
 }
 
-#taskList li:hover {
-  cursor: move;
-}
-
 #noTask {
   display: block;
 }
